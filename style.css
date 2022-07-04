@@ -374,9 +374,22 @@ Version:1.0
 .header.shop .topbar p {
 	color: #ccc;
 }
+
+
+
 .header.shop .topbar .login a {
 	color: #F7941D;
 }
+
+
+/*
+.header.shop .topbar .login a {
+	color: #ffffff;
+}
+*/
+
+
+
 /* Topbar Left Nav */
 .header.shop .left-nav{
 	
@@ -955,18 +968,40 @@ Version:1.0
 	-moz-transition: all 0.4s ease;
 	transition: all 0.4s ease;
 }
+
+/*
 .header.shop .nav li:hover a{
 	color:#fff;
 	background:#F7941D;
 }
+*/
+
+.header.shop .nav li:hover a{
+	color:rgb(0, 0, 0);
+	background:#ffffff;
+}
+
+
 .header.shop.v2 .nav li:hover a{
 	color:#F7941D;
 	background:transparent;
 }
+
+
+/*
 .header.shop .nav li.active a{
 	color:#fff;
 	background:#F7941D;
 }
+*/
+
+.header.shop .nav li.active a{
+	color:rgb(0, 0, 0);
+	background:#ffffff;
+}
+
+
+
 .header.shop.v2 .nav li.active a{
 	color:#333 !important;
 	background:transparent !important;

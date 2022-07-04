@@ -47,6 +47,8 @@
 </head>
 <body class="js">
 	
+	<main>
+
 	<!-- Preloader -->
 	<div class="preloader">
 		<div class="preloader-inner">
@@ -267,7 +269,7 @@
 													<img src="https://via.placeholder.com/225x155" alt="#">
 												</div>
 												<div class="inner-link">
-													<a href="#">Gorra</a>
+													<a href="#">Gorra Sublimada</a>
 													<!--<a href="#">Talla MEDIANA</a>
 													<a href="#">Talla GRANDE</a>-->
 												</div>
@@ -278,7 +280,7 @@
 													<img src="https://via.placeholder.com/225x155" alt="#">
 												</div>
 												<div class="inner-link">
-													<a href="#">Gorra</a>
+													<a href="#">Gorra Transfer</a>
 												</div>
 											</li>
 											<li class="single-menu">
@@ -287,7 +289,7 @@
 													<img src="https://via.placeholder.com/225x155" alt="#">
 												</div>
 												<div class="inner-link">
-													<a href="#">Gorra</a>
+													<a href="#">Gorra Vinil</a>
 												</div>
 											</li>
 										</ul>
@@ -302,7 +304,7 @@
 													<img src="https://via.placeholder.com/225x155" alt="#">
 												</div>
 												<div class="inner-link">
-													<a href="#">Sudadera</a>
+													<a href="#">Sudadera Transfer</a>
 													<!--<a href="#">Talla MEDIANA</a>
 													<a href="#">Talla GRANDE</a>-->
 												</div>
@@ -313,7 +315,7 @@
 													<img src="https://via.placeholder.com/225x155" alt="#">
 												</div>
 												<div class="inner-link">
-													<a href="#">Sudadera</a>
+													<a href="#">Sudadera Vinil</a>
 												</div>
 											</li>
 											
@@ -331,7 +333,7 @@
 									<div class="navbar-collapse">	
 										<div class="nav-inner">	
 											<ul class="nav main-menu menu navbar-nav">
-													<li class="active"><a href="#">Home</a></li>
+													<li class="active"><a href="#">Inicio</a></li>
 													<li><a href="#">Product</a></li>												
 													<li><a href="#">Service</a></li>
 													<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
@@ -2358,7 +2360,7 @@
 					<div class="col-lg-3 col-md-6 col-12">
 						<!-- Single Widget -->
 						<div class="single-footer social">
-							<h4>Get In Tuch</h4>
+							<h4>Get In Touch</h4>
 							<!-- Single Widget -->
 							<div class="contact">
 								<ul>
@@ -2375,6 +2377,13 @@
 								<li><a href="#"><i class="ti-flickr"></i></a></li>
 								<li><a href="#"><i class="ti-instagram"></i></a></li>
 							</ul>
+							<!-- Link : Inicio de sesión Admin -->
+							<div>
+								<a href="#" class="ml-3 book btn btn-secondary btn-style" data-toggle="modal" data-target="#modalInicioSesionAdmin">
+                    				Administrar
+                  				</a>
+							</div>
+							<!-- Link : Inicio de sesión Admin -->
 						</div>
 						<!-- End Single Widget -->
 					</div>
@@ -2435,5 +2444,85 @@
 	<script src="js/easing.js"></script>
 	<!-- Active JS -->
 	<script src="js/active.js"></script>
+	
+	<!-- # INI: Modal de Inicio de Sesión para los ADMINISTRADORES -->
+	<div class="modal fade" id="modalInicioSesionAdmin" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+	
+        <div class="modal-content">
+			<div>
+			<h3>Iniciar sesión</h3>
+			</div>
+            <div class="modal-header">
+				
+                <!-- <h5 id="tituloVentana" class="modal-title">Iniciar sesión (Administrador).</h5> -->
+				<!-- <h5 id="" class="modal-title">Iniciar sesión (Administrador).</h5> -->
+				
+				<button class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				
+                
+              </div> <!-- modal-header -->
+              <div class="modal-body">
+                <div class="alert alert-sucess">
+                    <h6 class="innerTitle">Ingrese su e-mail y contraseña.</h6>
+                </div>
+
+                <!-- espacio para menaje personalizado ... (error en login) ?? -->
+
+                <form action="php/usuarios/loginUsuarios.php" method="POST">
+                    <div class="form-group">
+                        <label for="id_email_usuario">e-mail: </label>
+                        <!-- <input id="id_selected_room" type="text" name="selected_room" readonly> -->
+                        <input id="id_email_usuario" type="email" name="email_usuario" class="form-control" placeholder="ejemplo@gmail.com" required>
+                    </div>
+
+                    <!-- INI: Datos Generales (SOLO consulta) -->
+                    <div class="form-group">
+                      <label for="id_contrasenia_usuario">Contraseña [mín 6, máx 20 caracteres]: </label>
+                      <input id="id_contrasenia_usuario" type="password" name="contrasenia_usuario" class="form-control" minlength="6" maxlength="20" required>
+                    </div>
+                                       
+                    <!-- FIN: Datos Generales (SOLO consulta) -->
+
+                    <div style="text-align: right;">
+                        
+                         <button class="btn btn-warning" type="button" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-success" type="submit" name="login_usuario_do">
+                            Ingresar
+                        </button>
+                        
+                    </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+					<!-- 
+						<span>
+                      		¿Aún NO está registrado?
+                      		<a href="php/clientes/formularioRegistroClientes.php"> Regístrese aquí. </a>
+                    	</span>
+					-->
+                  
+                  <!--
+                    <button class="btn btn-warning" type="button" data-dismiss="modal">
+                    Cerrar
+                </button>
+                  -->
+                  <!--
+                      
+                <button class="btn btn-success" type="button">
+                    Ingresar
+                </button>
+                  -->
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- * FIN: Modal de Inicio de Sesión para ADMINISTRADORES -->
+
+	</main>
 </body>
 </html>
