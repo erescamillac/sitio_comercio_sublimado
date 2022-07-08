@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php 
+	include("php/basedatos/conexion.php");
+?>
 <html lang="zxx">
 <head>
 	<!-- Meta Tag -->
@@ -143,7 +146,10 @@
 								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 							</div>
 							<div class="sinlge-bar shopping">
-								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+								<a href="#" class="single-icon">
+									<i class="ti-bag"></i> 
+									<span class="total-count">2</span>
+								</a>
 								<!-- Shopping Item -->
 								<div class="shopping-item">
 									<div class="dropdown-cart-header">
@@ -365,8 +371,9 @@
 	<!--/ End Header -->
 	
 	<!-- Slider Area -->
+	<!--
 	<section class="hero-slider">
-		<!-- Single Slider -->
+		## Single Slider ##
 		<div class="single-slider">
 			<div class="container">
 				<div class="row no-gutters">
@@ -388,18 +395,19 @@
 				</div>
 			</div>
 		</div>
-		<!--/ End Single Slider -->
-	</section>
+		## / End Single Slider ##
+	</section> -->
 	<!--/ End Slider Area -->
 	
 	<!-- Start Small Banner  -->
+	<!-- 
 	<section class="small-banner section">
 		<div class="container-fluid">
 			<div class="row">
-				<!-- Single Banner  -->
+				## Single Banner  ##
 				<div class="col-lg-4 col-md-6 col-12">
 					<div class="single-banner">
-						<!-- <img src="https://via.placeholder.com/600x370" alt="#"> -->
+						## <img src="https://via.placeholder.com/600x370" alt="#"> ##
 						<img src="images/mini-banner1.jpg" alt="#">
 						<div class="content">
 							<p>Man's Collectons</p>
@@ -408,8 +416,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- /End Single Banner  -->
-				<!-- Single Banner  -->
+				## /End Single Banner  ##
+				## Single Banner  ##
 				<div class="col-lg-4 col-md-6 col-12">
 					<div class="single-banner">
 						<img src="https://via.placeholder.com/600x370" alt="#">
@@ -420,8 +428,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- /End Single Banner  -->
-				<!-- Single Banner  -->
+				## /End Single Banner  ##
+				## Single Banner  ##
 				<div class="col-lg-4 col-12">
 					<div class="single-banner tab-height">
 						<img src="https://via.placeholder.com/600x370" alt="#">
@@ -432,10 +440,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- /End Single Banner  -->
+				## /End Single Banner  ##
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!-- End Small Banner -->
 	
 	<!-- Start Product Area -->
@@ -444,7 +452,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="section-title">
-							<h2>Trending Item</h2>
+							<h2>Productos</h2>
 						</div>
 					</div>
 				</div>
@@ -467,13 +475,36 @@
 								<!-- Start Single Tab -->
 								<div class="tab-pane fade show active" id="man" role="tabpanel">
 									<div class="tab-single">
-										<div class="row">
+										<div id="id-contenedor-productos" class="row">
+
+											<!-- código PHP SELECT : Carga dinámica de CATÁLOGO -->
+
+											<?php 
+													$pdo = new Conexion();
+
+													$stmt = $pdo->prepare( "SELECT * FROM producto" );
+													// $sql->bindValue(':id', $_GET['id']);
+													$stmt->execute();
+													$stmt->setFetchMode(PDO::FETCH_ASSOC);
+													// header("HTTP/1.1 200 OK");
+													// echo json_encode( $sql->fetchAll() );
+
+													// iteración fila a fila del ResultSet ::
+													$result = $stmt -> fetchAll();
+													foreach( $result as $row ) {
+														// echo "<br>";
+														// echo $row["nombre"];
+														
+											?>
+
 											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+												
 												<div class="single-product">
 													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+														<!-- <a href="product-details.html"> -->
+														<a href="#">	
+															<img class="default-img" src="images/products/<?php echo $row['url_imagen'];?>" alt="#">
+															<img class="hover-img" src="images/products/<?php echo $row['url_imagen'];?>" alt="#">
 														</a>
 														<div class="button-head">
 															<div class="product-action">
@@ -482,19 +513,30 @@
 																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 															</div>
 															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
+																<!-- <a title="Add to cart" href="#">Add to cart</a> -->
+																<a id="<?php echo $row['id_prod'];?>" data-id="<?php echo $row['id_prod'];?>" title="Add to cart" class="btn-add-to-cart" href="#">Agregar a carrito</a>
 															</div>
 														</div>
 													</div>
 													<div class="product-content">
-														<h3><a href="product-details.html">Women Hot Collection</a></h3>
+														<h3>
+															<!-- <a href="product-details.html"> -->
+															<a href="#">
+																<?php echo $row['nombre'];?>
+															</a>
+														</h3>
 														<div class="product-price">
-															<span>$29.00</span>
+															<span>$ <?php echo $row['precio_venta'];?></span>
 														</div>
+														<input id="<?php echo $row['id_prod'];?>" name="prod_id" type="hidden" value="<?php echo $row['id_prod'];?>">
 													</div>
 												</div>
-											</div>
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+											</div> <!-- CIERRE del Contenedor de single-product -->
+											<?php }?>
+
+
+											<!-- 
+															<div class="col-xl-3 col-lg-4 col-md-4 col-12">
 												<div class="single-product">
 													<div class="product-img">
 														<a href="product-details.html">
@@ -520,7 +562,10 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+											-->
+										
+										<!-- 
+									<div class="col-xl-3 col-lg-4 col-md-4 col-12">
 												<div class="single-product">
 													<div class="product-img">
 														<a href="product-details.html">
@@ -680,7 +725,68 @@
 													</div>
 												</div>
 											</div>
+
+										-->
+											
 										</div>
+
+										<!-- INI : Tabla VISIBLE :: 'Carrito' de compras -->
+										<table class="table">
+										<thead>
+											<tr>
+												<th scope="col"># (id)</th>
+												<th scope="col">Item</th>
+												<th scope="col">Cantidad</th>
+												<th scope="col">Acción</th>
+												<th scope="col">Precio unitario</th>
+												<th scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody id="items"></tbody>
+										<tfoot>
+											<tr id="footer">
+												<th scope="row" colspan="6">Carrito vacío - comience a comprar!</th>
+											</tr>
+										</tfoot>
+									</table>
+										<!-- FIN : Tabla VISIBLE :: 'Carrito' de compras -->
+
+										<!-- INI: Template de CARRITO -->
+										<template id="template-footer">
+											<th scope="row" colspan="2">Total productos</th>
+											<td>10</td>
+											<td>
+												<button class="btn btn-danger btn-sm" id="vaciar-carrito">
+													vaciar todo
+												</button>
+											</td>
+											<td class="font-weight-bold">$ <span>5000</span></td>
+    									</template>
+    
+										<template id="template-carrito">
+											<tr>
+												<th scope="row">id</th>
+												<td>Café</td>
+												<td>1</td>
+												
+												
+												<td>
+													<button class="btn btn-info btn-sm">
+														+
+													</button>
+													<button class="btn btn-danger btn-sm">
+														-
+													</button>
+												</td>
+												<!-- INI: #Experimento : add Column [Precio Unitario] -->
+												<td>
+													$  <span>1.00</span> 												
+												</td>
+												<!-- FIN: #Experimento : add Column [Precio Unitario] -->
+												<td>$ <span>500</span></td>
+											</tr>
+										</template>
+										<!-- FIN: Template de CARRITO -->
 									</div>
 								</div>
 								<!--/ End Single Tab -->
@@ -2444,7 +2550,12 @@
 	<script src="js/easing.js"></script>
 	<!-- Active JS -->
 	<script src="js/active.js"></script>
+	<!-- Carrito de compras JS -->
+	<script src="js/carritocompras/carrito-compras.js"></script>
 	
+	<!-- Script de Formulario login AJAX -->
+	<script src="js/formularios/formulario-login-ajax.js"></script>
+
 	<!-- # INI: Modal de Inicio de Sesión para los ADMINISTRADORES -->
 	<div class="modal fade" id="modalInicioSesionAdmin" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -2471,11 +2582,16 @@
 
                 <!-- espacio para menaje personalizado ... (error en login) ?? -->
 
-                <form action="php/usuarios/loginUsuarios.php" method="POST">
+				
+				<!-- CAMBIAR :: JS (prevent deaful) :: 
+				manejar con JS (Ajax) :: OK :: redirigir con JS (página de Administración) -->
+
+                <form id="id-formulario-login" action="php/usuarios/loginUsuarios.php" method="GET">
                     <div class="form-group">
                         <label for="id_email_usuario">e-mail: </label>
                         <!-- <input id="id_selected_room" type="text" name="selected_room" readonly> -->
-                        <input id="id_email_usuario" type="email" name="email_usuario" class="form-control" placeholder="ejemplo@gmail.com" required>
+						<input id="id_email_usuario" type="email" name="email_usuario" class="form-control" placeholder="ejemplo@gmail.com" required>
+                        <!-- <input id="id_email_usuario" type="email" name="email_usuario" class="form-control" placeholder="ejemplo@gmail.com" required> -->
                     </div>
 
                     <!-- INI: Datos Generales (SOLO consulta) -->
@@ -2491,7 +2607,7 @@
                          <button class="btn btn-warning" type="button" data-dismiss="modal">
                             Cancelar
                         </button>
-                        <button class="btn btn-success" type="submit" name="login_usuario_do">
+                        <button id="btnEnviarLogin" class="btn btn-success" type="submit" name="login_usuario_do">
                             Ingresar
                         </button>
                         
