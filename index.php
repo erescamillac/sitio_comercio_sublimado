@@ -45,6 +45,9 @@
 	<link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
 
+	<!-- Custom EEC css-->
+	<link rel="stylesheet" href="css/custom-erick-css.css">
+
 	
 	
 </head>
@@ -145,41 +148,123 @@
 							<div class="sinlge-bar">
 								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 							</div>
+							<!-- INI: sinlge-bar shopping : Contenedor Principal de la 'Lista' de artículos del "Carrito de compras" / 'Bolsa' de compras -->
 							<div class="sinlge-bar shopping">
 								<a href="#" class="single-icon">
+									<!-- ti-bag : Mostrar ÍCONO de la Bolsa de compras-->
 									<i class="ti-bag"></i> 
-									<span class="total-count">2</span>
+									<!-- total-count : muestra el NÚMERO TOTAL de Artículos agregados ACTUALMENTE al Carrito-->
+									<span class="total-count">0</span>
 								</a>
-								<!-- Shopping Item -->
-								<div class="shopping-item">
+								<!-- Shopping Item : LISTA de Artículos-->
+								<div id="carrito-general-orange" class="shopping-item">
 									<div class="dropdown-cart-header">
-										<span>2 Items</span>
-										<a href="#">View Cart</a>
-									</div>
-									<ul class="shopping-list">
+										<span>0 Artículos</span>
+										<a href="#">Ver carrito</a>
+									</div> <!-- fin: div.[dropdown-cart-header] -->
+									
+									<!-- 'Real Container' de los Items en el Carrito de Compras -->
+									<!-- INI: ul.[shopping-list] -->
+									<ul id="real-container-detalles-venta" class="shopping-list">
+										<!-- ini: li : Representa a cada uno de los 'Detalles de Venta' (nombre del artículo,precio unit., cantidad, subtotal) -->
+
+										<!-- 
 										<li>
 											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
 											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
 											<h4><a href="#">Woman Ring</a></h4>
 											<p class="quantity">1x - <span class="amount">$99.00</span></p>
 										</li>
+										-->
+										
+										<!-- fin: li : Represebta a cada uno de los 'Detalles de Venta' (nombre del artículo,precio unit., cantidad, subtotal) -->
+										<!-- 
 										<li>
 											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
 											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
 											<h4><a href="#">Woman Necklace</a></h4>
 											<p class="quantity">1x - <span class="amount">$35.00</span></p>
 										</li>
-									</ul>
-									<div class="bottom">
+										-->
+										
+									</ul> <!-- FIN: ul.[shopping-list] : 'Real Container' de los Items en el Carrito de Compras-->
+
+									<!-- AL MISMO NIVEL que el 'Real Container' de los ITEMS (ul), colocar :: -->
+									<!-- los TEMPLATES de las 'filas' ('Detalles de venta') y 'footer' (TOTAL de Venta):: -->
+
+									<!-- INI: templates de Carrito 'Orange' -->
+									<template id="template-orange-footer">
+										<!-- 
+										<th scope="row" colspan="2">Total productos</th>
+										<td>10</td>
+										<td>
+											<button class="btn btn-danger btn-sm" id="vaciar-carrito">
+												vaciar todo
+											</button>
+										</td>
+										<td class="font-weight-bold">$ <span>5000</span></td>
+										-->
 										<div class="total">
 											<span>Total</span>
 											<span class="total-amount">$134.00</span>
 										</div>
-										<a href="checkout.html" class="btn animate">Checkout</a>
-									</div>
+										<a href="checkout.html" class="btn animate">PAGAR</a>
+										
+    								</template> <!-- fin: template-orange-footer-->
+    
+									<!-- template-orange-carrito (li) :: Representa cada
+								una de las FILAS ('Detalles de Venta') en el carrito -->
+									<template id="template-orange-carrito">
+										<!-- 
+										<tr> (li)
+											<th scope="row">id</th>
+											<td>Café</td>
+											<td>1</td>
+											
+											<td>
+												<button class="btn btn-info btn-sm">
+													+
+												</button>
+												<button class="btn btn-danger btn-sm">
+													-
+												</button>
+											</td>
+											<** INI: #Experimento : add Column [Precio Unitario] **>
+											<td>
+												$  <span>1.00</span> 												
+											</td>
+											<** FIN: #Experimento : add Column [Precio Unitario] **>
+											<td>$ <span>500</span></td>
+										</tr>
+										-->
+										<li>
+											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+											<a class="cart-img" href="#"><img class="img-70p-70p" src="https://via.placeholder.com/70x70" alt="#"></a>
+											<!-- 'Woman Ring' : nombre del artículo -->
+											<h4><a href="#">Woman Ring</a></h4>
+											<!-- Cantidad y precio Unitario -->
+											<p class="quantity">
+												<span class="cantidad-articulos">1x - </span>
+												<span class="amount">$99.00</span>
+											</p>
+										</li>
+									</template> <!-- fin: template-orange-carrito -->
+									<!-- FIN: templates de Carrito 'Orange' -->
+
+									<!-- INI: div.[bottom] :: Representa el footer (TOTAL) del Carrito de compras -->
+									<!-- .bottom :: CONTENEDOR de [templateOrangeFooter] -->
+									<div id="contenedor-template-orange-footer" class="bottom">
+										<!-- 
+										<div class="total">
+											<span>Total</span>
+											<span class="total-amount">$134.00</span>
+										</div>
+										<a href="checkout.html" class="btn animate">PAGAR</a>
+										-->
+									</div> <!-- FIN: div.[bottom] :: Representa el footer (TOTAL) del Carrito de compras -->
 								</div>
-								<!--/ End Shopping Item -->
-							</div>
+								<!--/ End Shopping Item : LISTA de Artículos -->
+							</div> <!-- FIN: sinlge-bar shopping -->
 						</div>
 					</div>
 				</div>
@@ -535,220 +620,34 @@
 											<?php }?>
 
 
-											<!-- 
-															<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">Awesome Pink Show</a></h3>
-														<div class="product-price">
-															<span>$29.00</span>
-														</div>
-													</div>
-												</div>
-											</div>
+											<!-- 		
 											-->
 										
 										<!-- 
-									<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">Awesome Bags Collection</a></h3>
-														<div class="product-price">
-															<span>$29.00</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-															<span class="new">New</span>
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">Women Pant Collectons</a></h3>
-														<div class="product-price">
-															<span>$29.00</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">Awesome Bags Collection</a></h3>
-														<div class="product-price">
-															<span>$29.00</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-															<span class="price-dec">30% Off</span>
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">Awesome Cap For Women</a></h3>
-														<div class="product-price">
-															<span>$29.00</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">Polo Dress For Women</a></h3>
-														<div class="product-price">
-															<span>$29.00</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-															<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-															<span class="out-of-stock">Hot</span>
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">Black Sunglass For Women</a></h3>
-														<div class="product-price">
-															<span class="old">$60.00</span>
-															<span>$50.00</span>
-														</div>
-													</div>
-												</div>
-											</div>
-
 										-->
 											
-										</div>
+										</div> <!-- FIN: div [id-contenedor-productos] ('Fila' contenedora de Productos)-->
 
-										<!-- INI : Tabla VISIBLE :: 'Carrito' de compras -->
+										<!-- INI : Tabla VISIBLE :: 'Carrito' de compras (GUI) -->
+										<!-- table :: 'Real Container' del listado de Items en el Carrito -->
 										<table class="table">
-										<thead>
-											<tr>
-												<th scope="col"># (id)</th>
-												<th scope="col">Item</th>
-												<th scope="col">Cantidad</th>
-												<th scope="col">Acción</th>
-												<th scope="col">Precio unitario</th>
-												<th scope="col">Total</th>
-											</tr>
-										</thead>
-										<tbody id="items"></tbody>
-										<tfoot>
-											<tr id="footer">
-												<th scope="row" colspan="6">Carrito vacío - comience a comprar!</th>
-											</tr>
-										</tfoot>
-									</table>
+											<thead>
+												<tr>
+													<th scope="col"># (id)</th>
+													<th scope="col">Item</th>
+													<th scope="col">Cantidad</th>
+													<th scope="col">Acción</th>
+													<th scope="col">Precio unitario</th>
+													<th scope="col">Total</th>
+												</tr>
+											</thead>
+											<tbody id="items"></tbody>
+											<tfoot>
+												<tr id="footer">
+													<th scope="row" colspan="6">Carrito vacío - comience a comprar!</th>
+												</tr>
+											</tfoot>
+										</table>
 										<!-- FIN : Tabla VISIBLE :: 'Carrito' de compras -->
 
 										<!-- INI: Template de CARRITO -->
@@ -787,8 +686,8 @@
 											</tr>
 										</template>
 										<!-- FIN: Template de CARRITO -->
-									</div>
-								</div>
+									</div> <!-- fin: div.[tab-single] -->
+								</div> <!-- fin: div.[tab-pane fade show active] id="man" --> 
 								<!--/ End Single Tab -->
 								<!-- Start Single Tab -->
 								<div class="tab-pane fade" id="women" role="tabpanel">
@@ -2586,10 +2485,13 @@
 				<!-- CAMBIAR :: JS (prevent deaful) :: 
 				manejar con JS (Ajax) :: OK :: redirigir con JS (página de Administración) -->
 
-                <form id="id-formulario-login" action="php/usuarios/loginUsuarios.php" method="GET">
+                <!-- <form id="id-formulario-login" action="php/usuarios/loginUsuarios.php" method="GET"> -->
+				<form action="php/usuarios/loginUsuarios.php" method="POST"> 
                     <div class="form-group">
                         <label for="id_email_usuario">e-mail: </label>
                         <!-- <input id="id_selected_room" type="text" name="selected_room" readonly> -->
+						<!--<input id="id_email_usuario" type="email" name="email" class="form-control" placeholder="ejemplo@gmail.com" required>-->
+
 						<input id="id_email_usuario" type="email" name="email_usuario" class="form-control" placeholder="ejemplo@gmail.com" required>
                         <!-- <input id="id_email_usuario" type="email" name="email_usuario" class="form-control" placeholder="ejemplo@gmail.com" required> -->
                     </div>
@@ -2597,7 +2499,8 @@
                     <!-- INI: Datos Generales (SOLO consulta) -->
                     <div class="form-group">
                       <label for="id_contrasenia_usuario">Contraseña [mín 6, máx 20 caracteres]: </label>
-                      <input id="id_contrasenia_usuario" type="password" name="contrasenia_usuario" class="form-control" minlength="6" maxlength="20" required>
+                      <!--<input id="id_contrasenia_usuario" type="password" name="contrasenia" class="form-control" minlength="6" maxlength="20" required>-->
+					  <input id="id_contrasenia_usuario" type="password" name="contrasenia_usuario" class="form-control" minlength="6" maxlength="20" required>
                     </div>
                                        
                     <!-- FIN: Datos Generales (SOLO consulta) -->

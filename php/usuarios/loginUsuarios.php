@@ -77,8 +77,8 @@
         }else{
             // el correo NO ESTÁ REGISTRADO en el Sistema...
             // err: msg
-
-            header("location:../../index.php");
+            echo "ERROR en login";
+            //header("location:../../index.php");
         }
         
     } // -- FIN: isset $_POST['login_cliente_do']

@@ -4,7 +4,8 @@ session_start();
 class Conexion extends PDO
 {
 	private $hostBd = 'localhost';
-	private $nombreBd = 'bd_tienda_sublimado_v3';
+	//private $nombreBd = 'bd_tienda_sublimado_v3';
+	private $nombreBd = 'bd_tienda_sublimado_v4';
 	private $usuarioBd = 'root';
 	private $passwordBase = '';
 	
