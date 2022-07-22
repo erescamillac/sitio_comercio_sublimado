@@ -56,7 +56,7 @@ const addCarrito = e => {
 		// console.log( e.target.parentElement.parentElement.parentElement.parentElement );
 		// [e.target] : REFERS to LINK 'Agregar a carrito'
 		// .parentElement... : 'apuntar' a div.single-product (Contenedor General 
-		// de los Detalles del Artículo ESPECÍFICO [nombre_art, precio_unit, id_prod])
+		// de los Detalles del Artículo ESPECÍFICO (seleccionado / clickeado por el Usuario) [nombre_art, precio_unit, id_prod])
 
 		// la función [setCarrito()] es la QUE REALMENTE 'agregar' el Producto a la 'Lista interna' del OBJ. js [carrito={}] 
 		setCarrito( e.target.parentElement.parentElement.parentElement.parentElement );
@@ -64,6 +64,10 @@ const addCarrito = e => {
 	e.stopPropagation();
 }
 
+
+// la funcion setCarrito( objeto ) :: contiene la LÓGICA
+//  para agregar el Artículo seleccionado por el Cliente 
+// al obj. JS [carrito] EN MEMORIA (--sin mostrar en Pantalla : GUI / HTML5--)
 const setCarrito = objeto => {
 	console.log( "dentro de la función setCarrito(objeto)" );
 	// [objeto] :: 'apunta' a div.single-product
@@ -73,25 +77,36 @@ const setCarrito = objeto => {
     console.log( "id (del Producto a AGREGAR al carrito-JS-) :: " );
     console.log( objeto.querySelector("div.product-content input[name='prod_id']").id );
     
-	// 'Construcción' del objeto [producto] que se AGREGARÁ al carrito...
+	// 'Construcción' del objeto [producto] (EN MEMORIA) que se AGREGARÁ al carrito...
 	const producto = {
         // var el = document.querySelector("div.user-panel.main input[name='login']");
 		// id: objeto.querySelector('.btn-dark').dataset.id
         id: objeto.querySelector("div.product-content input[name='prod_id']").id,
         titulo: objeto.querySelector('div.product-content h3 a').textContent,
         precio: objeto.querySelector('div.product-content div.product-price span').textContent,
+		urlImagen: objeto.querySelector('div.product-img a.img-producto-menu img.default-img').src,
         cantidad: 1
 	};
+
+	// Mostrar el contenido del OBJ. recién creado [producto] :
+	console.log( "--Contenido del Nuevo-OBJ [producto]." );
+	console.log( producto );
+	console.log( "++Contenido del Nuevo-OBJ [producto]." );
 
 
     producto.precio = producto.precio.replace("$", "");
 
+	// -- SI el carrito YA CONTIENE (previamente) el Artículo seleccionado
+	// ++ EVITAR: duplicidad en el Listado de Artículos (SOLO AUMENTAR la .propiedad ${.cantidad} del OBJ-JS [producto])
     if( carrito.hasOwnProperty(producto.id) ){
 		// SOLO aumentar la cantidad del artículo::
+		console.log( "****SE dectecto PRODUCTO REPETIDO::" );
 		producto.cantidad = carrito[producto.id].cantidad + 1;
 	}
 
 	// {...producto} :: COPIA del OBJ. JS [producto]
+	console.log( "++Producto YA MODIFICADO en su attr. ${.cantidad} :: " );
+	console.log( producto );
     carrito[producto.id] = {...producto};
 
 	// función pintarCarrito() :: 'RENDERIZAR' en GUI (Tabla-HTML5)
@@ -124,25 +139,83 @@ const pintarCarrito = () => {
 	Object.values(carrito).forEach( producto => {
 		// 'template-carrito' : (GUI: HTML5) representa UNA FILA (<tr>) de 'Detalle de venta' en el carrito (GUI: HTML5)
 		templateCarrito.querySelector('th').textContent = producto.id
+		// equivalente en Orange ...
+		templateOrangeCarrito.querySelector("input[name='prod_id_detalle_carrito']").value = producto.id
+
 		templateCarrito.querySelectorAll('td')[0].textContent = producto.titulo
 		// Orange ... ?? 
 		templateOrangeCarrito.querySelector('h4 a').textContent = producto.titulo
 
 		templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad
+		// Orange ...??
+		templateOrangeCarrito.querySelector( 'p.quantity span.cantidad-articulos' ).textContent = producto.cantidad
 		// <button class="btn btn-info btn-sm" data-id="4">
 		templateCarrito.querySelector('.btn-info').dataset.id = producto.id
 		templateCarrito.querySelector('.btn-danger').dataset.id = producto.id
+
+		// Equivalente 'Orange' de los botones de Aumentar / Disminuir ::
+		templateOrangeCarrito.querySelector('div.contenedor-botones-mas-menos').querySelectorAll('button')[0].dataset.id = producto.id
+		templateOrangeCarrito.querySelector('div.contenedor-botones-mas-menos').querySelectorAll('button')[1].dataset.id = producto.id
+
+		templateOrangeCarrito.querySelector('div.contenedor-botones-mas-menos').querySelectorAll('button')[2].dataset.id = producto.id
+
 		templateCarrito.querySelectorAll('td')[3].querySelector('span').textContent = producto.precio
+		// Orange ...??
+		// precio unitario
+		templateOrangeCarrito.querySelector('p.quantity span.amount').textContent = producto.precio
 		templateCarrito.querySelectorAll('td')[4].querySelector('span').textContent = producto.precio * producto.cantidad
+		// Orange ...
+		templateOrangeCarrito.querySelector('p.quantity span.subtotal-detalle strong').textContent = producto.precio * producto.cantidad
+
+		templateOrangeCarrito.querySelector('div.contenedor-img-art-carrito a.cart-img img.img-70p-70p').src = producto.urlImagen
+		// Paso 1.- obtener la URL de la img (desde la BD)
+		// -- utilizar AJAX ::
+		/* 
+		const dataImgProd = await obtenerImagenProducto( { "id_producto" : producto.id } );
+		templateOrangeCarrito.querySelector('div.contenedor-img-art-carrito a.cart-img img.img-70p-70p').src = dataImgProd.url_imagen;
+		// --- INI: AJAX
+		*/
+		
+		// templateOrangeCarrito 
+		/*
+		<img class="img-70p-70p" src="https://via.placeholder.com/70x70" alt="#">
+		*/
+		// URL : http://localhost/api_tmp_sublimado/productos.php
+		
+		// +++ FIN: AJAX
+
 		const clone = templateCarrito.cloneNode(true)
 		fragment.appendChild( clone )
 
 		const cloneOrange = templateOrangeCarrito.cloneNode(true)
 		fragmentOrange.appendChild( cloneOrange )
+
+		// const cloneOrange = templateOrangeCarrito.cloneNode(true)
+		// fragmentOrange.appendChild( cloneOrange )
 	});
 	
 	// [fragment] :: <tr> </tr> correspondiente a N 'DetalleS de venta' (GUI), se agrregaN como hijos al
 	// <tbody> de la Tabla-HTML5 (GUI: del carrito de compras) 
 	items.appendChild( fragment );
 	itemsOrange.appendChild( fragmentOrange );
+
+	pintarFooter();
+}
+
+const pintarFooter = () =>{
+	console.log( "dentro de la función pintarFooter()" );
+	footer.innerHTML = '';
+	// SI el carrito está VACÍO
+	if(Object.keys(carrito).length === 0){
+		footer.innerHTML = `<th scope="row" colspan="6">Carrito vacío - comience a comprar!</th>`;
+	} //-- fin IF carrito VACÍO
+	const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0);
+	// producto.precio * producto.cantidad
+	const nPrecio = Object.values(carrito).reduce(
+		(accMonto, {precio, cantidad}) => accMonto + (precio * cantidad), 
+	0);
+	console.log( "Cantidad TOTAL de artículos en el Carrito ::" );
+	console.log( nCantidad );
+	console.log( "TOTAL de la Compra :: " );
+	console.log( nPrecio );
 }

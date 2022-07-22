@@ -238,15 +238,44 @@
 										</tr>
 										-->
 										<li>
-											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-											<a class="cart-img" href="#"><img class="img-70p-70p" src="https://via.placeholder.com/70x70" alt="#"></a>
+											<div class="contenedor-img-art-carrito">
+												<!-- 
+													<a href="#" class="remove" title="Remove this item">
+														<i class="fa fa-remove"></i>
+													</a>
+												-->
+												
+													<a class="cart-img" href="#">
+														<img class="img-70p-70p" src="https://via.placeholder.com/70x70" alt="#">
+													</a>
+												
+											</div>
+											
+											<!-- ++Intentar agregar ID del artículo como INPUT-hidden -->
+											<input name="prod_id_detalle_carrito" type="hidden" value="">
+											<!-- **Intentar agregar ID del artículo como INPUT-hidden -->
+
 											<!-- 'Woman Ring' : nombre del artículo -->
 											<h4><a href="#">Woman Ring</a></h4>
 											<!-- Cantidad y precio Unitario -->
 											<p class="quantity">
-												<span class="cantidad-articulos">1x - </span>
-												<span class="amount">$99.00</span>
+												<span class="cantidad-articulos">1</span>x - 
+												$ <span class="amount">99.00</span>
+												<span class="subtotal-detalle"> | ($ <strong>125.00</strong>)</span>
 											</p>
+											<div class="contenedor-botones-mas-menos">
+												<!-- <button class="btn btn-info btn-sm"> -->
+												<button class="boton_personalizado">
+													+
+												</button>
+												<!-- <button class="btn btn-danger btn-sm"> -->
+												<button class="boton_personalizado">
+													-
+												</button>
+												<button class="boton_personalizado">
+													<i class="fa fa-trash"></i>
+												</button>
+											</div>
 										</li>
 									</template> <!-- fin: template-orange-carrito -->
 									<!-- FIN: templates de Carrito 'Orange' -->
@@ -276,6 +305,7 @@
 				<div class="cat-nav-head">
 					<div class="row">
 						<div class="col-lg-3">
+							<!-- 
 							<div class="all-category">
 								<h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>CATEGORÍAS</h3>
 								<ul class="main-category">
@@ -330,9 +360,9 @@
 											<div class="inner-link">
 
 												<a href="#">Tazas Mágicas</a>
-												<!--<a href="#">Normales</a>-->
+												
 											
-											</div>
+												</div>
 										</li>
 
 										<li class="single-menu">
@@ -344,7 +374,7 @@
 										
 										
 										<div class="inner-link">
-											<!--<a href="#">Mágicas</a>-->
+											
 											<a href="#">Tazas Normales</a>
 										
 										</div>
@@ -361,8 +391,7 @@
 												</div>
 												<div class="inner-link">
 													<a href="#">Gorra Sublimada</a>
-													<!--<a href="#">Talla MEDIANA</a>
-													<a href="#">Talla GRANDE</a>-->
+													
 												</div>
 											</li>
 											<li class="single-menu">
@@ -396,8 +425,7 @@
 												</div>
 												<div class="inner-link">
 													<a href="#">Sudadera Transfer</a>
-													<!--<a href="#">Talla MEDIANA</a>
-													<a href="#">Talla GRANDE</a>-->
+													
 												</div>
 											</li>
 											<li class="single-menu">
@@ -416,6 +444,8 @@
 									
 								</ul>
 							</div>
+							-->
+							
 						</div>
 						<div class="col-lg-9 col-12">
 							<div class="menu-area">
@@ -587,7 +617,7 @@
 												<div class="single-product">
 													<div class="product-img">
 														<!-- <a href="product-details.html"> -->
-														<a href="#">	
+														<a class="img-producto-menu" href="#">	
 															<img class="default-img" src="images/products/<?php echo $row['url_imagen'];?>" alt="#">
 															<img class="hover-img" src="images/products/<?php echo $row['url_imagen'];?>" alt="#">
 														</a>
@@ -602,7 +632,7 @@
 																<a id="<?php echo $row['id_prod'];?>" data-id="<?php echo $row['id_prod'];?>" title="Add to cart" class="btn-add-to-cart" href="#">Agregar a carrito</a>
 															</div>
 														</div>
-													</div>
+													</div> <!-- cierre: div.product-img-->
 													<div class="product-content">
 														<h3>
 															<!-- <a href="product-details.html"> -->
@@ -614,7 +644,7 @@
 															<span>$ <?php echo $row['precio_venta'];?></span>
 														</div>
 														<input id="<?php echo $row['id_prod'];?>" name="prod_id" type="hidden" value="<?php echo $row['id_prod'];?>">
-													</div>
+													</div> <!-- cierre:  div.product-content-->
 												</div>
 											</div> <!-- CIERRE del Contenedor de single-product -->
 											<?php }?>

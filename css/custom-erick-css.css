@@ -2,3 +2,18 @@
     width: 70px;
     height: 70px;
 }
+
+.boton_personalizado{
+    text-decoration: none;
+    padding: 6px;
+    font-weight: 500;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #df9813;
+    border-radius: 6px;
+    border: 2px solid #ffffff;
+}
+
+.boton_personalizado:hover{
+    background-color: #000000;
+}
