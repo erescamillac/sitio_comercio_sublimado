@@ -178,14 +178,6 @@
 										-->
 										
 										<!-- fin: li : Represebta a cada uno de los 'Detalles de Venta' (nombre del artículo,precio unit., cantidad, subtotal) -->
-										<!-- 
-										<li>
-											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-											<h4><a href="#">Woman Necklace</a></h4>
-											<p class="quantity">1x - <span class="amount">$35.00</span></p>
-										</li>
-										-->
 										
 									</ul> <!-- FIN: ul.[shopping-list] : 'Real Container' de los Items en el Carrito de Compras-->
 
@@ -205,8 +197,8 @@
 										<td class="font-weight-bold">$ <span>5000</span></td>
 										-->
 										<div class="total">
-											<span>Total</span>
-											<span class="total-amount">$134.00</span>
+											<span>Total </span>
+											$ <span class="total-amount">134.00</span>
 										</div>
 										<a href="checkout.html" class="btn animate">PAGAR</a>
 										
@@ -265,14 +257,14 @@
 											</p>
 											<div class="contenedor-botones-mas-menos">
 												<!-- <button class="btn btn-info btn-sm"> -->
-												<button class="boton_personalizado">
+												<button class="boton_personalizado btnAgregar">
 													+
 												</button>
 												<!-- <button class="btn btn-danger btn-sm"> -->
-												<button class="boton_personalizado">
+												<button class="boton_personalizado btnDisminuir">
 													-
 												</button>
-												<button class="boton_personalizado">
+												<button class="boton_personalizado btn_eliminar_art">
 													<i class="fa fa-trash"></i>
 												</button>
 											</div>

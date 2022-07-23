@@ -33,8 +33,29 @@ const footer = document.getElementById('footer')
 // <div id="contenedor-template-orange-footer" class="bottom">
 const footerOrange = document.getElementById('contenedor-template-orange-footer')
 
+// EQUIV :: header 
+const carritoGeneralOrange = document.getElementById('carrito-general-orange')
+
 // Representación del CARRITO a nivel LÓGICO (en Memoria) como un OBJETO, inicialmente VACÍO (sin propiedades)
 let carrito = {};
+
+// --
+document.addEventListener('DOMContentLoaded', () => {
+	// fetchData();
+	if(localStorage.getItem('carrito')){
+		carrito = JSON.parse( localStorage.getItem('carrito') );
+		pintarCarrito();
+	}
+});
+
+const fetchData = async () => {
+	try{
+		const res = await fetch('api.json');
+		const data = await res.json();
+	}catch(error){
+		console.log(error)
+	}
+}
 
 // CADA VEZ que se haga CLIC en alguno de los elementos hijo de la 'Fila de productos'
 // <div> contenedor de los 'Productos' (GUI) [div.single-product 'tarjeta de producto(GUI)']
@@ -42,6 +63,71 @@ let carrito = {};
 filaProductos.addEventListener('click', e => {
 	addCarrito(e)
 });
+
+// CADA VEZ que se haga CLIC en alguno de los DETALLES DE VENTA (elementos hijo) del 'UL' 
+// se invoca a la función ${deteccionBtnIdBasura}
+// 'Real-Container' :: <ul id="real-container-detalles-venta" class="shopping-list"> (UL) ::
+// const itemsOrange = document.getElementById('real-container-detalles-venta')
+itemsOrange.addEventListener('click', e => {
+	btnAccionArticulo(e)
+});
+
+const btnAccionArticulo = e =>{
+	console.log( "dentro de la función deteccionBtnIdBasura(e)..." );
+	console.log( e.target );
+	console.log( "LISTA DE TODAS LAS Clases del elemento HTML en el que se hizo CLICK" );
+	console.log( e.target.classList );
+	console.log( e.target.classList.contains('fa-trash') );
+	if( e.target.classList.contains('fa-trash') ){
+		// e.target :: <i class="fa fa-trash"></i>
+		console.log( "se hizo click en el Botón [ELIMINAR Artículo]" );
+		/*
+		<button class="boton_personalizado btn_eliminar_art" data-id="1">
+													<i class="fa fa-trash"></i>
+												</button>
+		*/
+		let btnEliminarArticulo = e.target.parentElement;
+		console.log( btnEliminarArticulo );
+		console.log( "El Artículo SELECCIONADO para ser Eliminado del carrito (id) es :: " );
+		console.log( btnEliminarArticulo.dataset.id );
+
+		//1.- Actualizar el objeto carrito [Eliminar la propiedad del Artículo]
+		// carrito
+		idProductoEliminar = btnEliminarArticulo.dataset.id;
+		delete carrito[idProductoEliminar];
+		//delete carrito[producto.id];
+
+		//2.- pintarCarrito()
+		// pintarCarrito();
+	}else if( e.target.classList.contains('btnAgregar') ){
+		console.log( "Se hizo clic en el Boton [AGREGAR] : [+]" );
+		let btnAumentar = e.target;
+		idProductoAumentar = btnAumentar.dataset.id;
+		console.log( "id del Producto (Aumentar) :: " );
+		console.log( idProductoAumentar );
+		const prodcutoTmp = carrito[idProductoAumentar];
+		prodcutoTmp.cantidad = carrito[idProductoAumentar].cantidad + 1;
+		carrito[idProductoAumentar] = {...prodcutoTmp};
+	}else if( e.target.classList.contains('btnDisminuir') ){
+		console.log( "Se hizo clic en el Boton [DISMINUIR] : [-]" );
+		let btnDisminuir = e.target;
+		idProductoDisminuir = btnDisminuir.dataset.id;
+
+		const prodcutoTmp = carrito[idProductoDisminuir];
+		prodcutoTmp.cantidad = carrito[idProductoDisminuir].cantidad - 1;
+
+		if( prodcutoTmp.cantidad === 0 ){
+			delete carrito[idProductoDisminuir];
+		}else{
+			console.log( "id del Producto (Disminuir) :: " );
+			console.log( idProductoDisminuir );
+			carrito[idProductoDisminuir] = {...prodcutoTmp};
+		}
+
+	}
+	pintarCarrito();
+	e.stopPropagation();
+}
 
 const addCarrito = e => {
 	console.log( "dentro de la función addCarrito(e)..." );
@@ -200,14 +286,21 @@ const pintarCarrito = () => {
 	itemsOrange.appendChild( fragmentOrange );
 
 	pintarFooter();
+	// ALMACENAR [carrito] en LOCAL-STORAGE ::
+	localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
 const pintarFooter = () =>{
 	console.log( "dentro de la función pintarFooter()" );
+	let fragment = new DocumentFragment();
+	let fragmentOrange = new DocumentFragment();
 	footer.innerHTML = '';
+	footerOrange.innerHTML = '';
 	// SI el carrito está VACÍO
 	if(Object.keys(carrito).length === 0){
 		footer.innerHTML = `<th scope="row" colspan="6">Carrito vacío - comience a comprar!</th>`;
+		fragmentOrange.innerHTML = `<div>Carrito vacío - comience a comprar!</div>`;
+		return
 	} //-- fin IF carrito VACÍO
 	const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0);
 	// producto.precio * producto.cantidad
@@ -218,4 +311,25 @@ const pintarFooter = () =>{
 	console.log( nCantidad );
 	console.log( "TOTAL de la Compra :: " );
 	console.log( nPrecio );
+
+	templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+	
+	templateFooter.querySelector('span').textContent = nPrecio
+	templateOrangeFooter.querySelector('div.total span.total-amount').textContent = nPrecio
+
+	carritoGeneralOrange.querySelector('div.dropdown-cart-header span').textContent = nCantidad + " Artículos"
+
+	const clone = templateFooter.cloneNode(true)
+	const cloneOrange = templateOrangeFooter.cloneNode(true)
+
+	fragment.appendChild(clone)
+	fragmentOrange.appendChild(cloneOrange)
+	footer.appendChild(fragment)
+	footerOrange.appendChild(fragmentOrange)
+
+	const btnVaciar = document.getElementById('vaciar-carrito')
+	btnVaciar.addEventListener('click', () => {
+		carrito = {} // OBJ. JS -- vacío
+		pintarCarrito()
+	});
 }
