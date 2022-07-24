@@ -17,3 +17,8 @@
 .boton_personalizado:hover{
     background-color: #000000;
 }
+
+.orange-text-1{
+    color: #dfbe81;
+    font-weight: bold;
+}

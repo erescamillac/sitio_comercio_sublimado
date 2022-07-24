@@ -36,6 +36,9 @@ const footerOrange = document.getElementById('contenedor-template-orange-footer'
 // EQUIV :: header 
 const carritoGeneralOrange = document.getElementById('carrito-general-orange')
 
+// EQUIV :: 'Orange'-header : Total de Artículos ::
+const barraNaranjaDeCompras = document.getElementById('barraDeCompras')
+
 // Representación del CARRITO a nivel LÓGICO (en Memoria) como un OBJETO, inicialmente VACÍO (sin propiedades)
 let carrito = {};
 
@@ -125,6 +128,7 @@ const btnAccionArticulo = e =>{
 		}
 
 	}
+	console.log( "--SE VUELVE A PINTAR EL CARRITO() :: " );
 	pintarCarrito();
 	e.stopPropagation();
 }
@@ -213,7 +217,9 @@ TODO:
 // del Carrito de Compras en PANTALLA (a vista del Usuario -Cliente-)...
 const pintarCarrito = () => {
     console.log( "dentro de la función pintarCarrito()..." );
+	console.log( "##-- INI: Contenido del OBJ. JS carrito" );
 	console.log( carrito );
+	console.log( "##++ FIN: Contenido del OBJ. JS carrito" );
 	// 'items' hace REF. al <tbody> de la TABLA-HTML que representa visualmente al Carrito de compras
     items.innerHTML = '';
 	// EQUIV. Orange Carrito::
@@ -285,6 +291,7 @@ const pintarCarrito = () => {
 	items.appendChild( fragment );
 	itemsOrange.appendChild( fragmentOrange );
 
+	console.log( "se vuelve a pintar el FOOTER... ::" );
 	pintarFooter();
 	// ALMACENAR [carrito] en LOCAL-STORAGE ::
 	localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -298,8 +305,12 @@ const pintarFooter = () =>{
 	footerOrange.innerHTML = '';
 	// SI el carrito está VACÍO
 	if(Object.keys(carrito).length === 0){
+		console.log( "--El carrito ESTÁ VACÍO ::--" );
 		footer.innerHTML = `<th scope="row" colspan="6">Carrito vacío - comience a comprar!</th>`;
 		fragmentOrange.innerHTML = `<div>Carrito vacío - comience a comprar!</div>`;
+		// Actualizar Total de Artículos Naranja 'barra'
+		barraNaranjaDeCompras.querySelectorAll('a')[0].querySelector('span.total-count').textContent = 0
+		carritoGeneralOrange.querySelector('div.dropdown-cart-header span').textContent = 0 + " Artículos"
 		return
 	} //-- fin IF carrito VACÍO
 	const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0);
@@ -318,6 +329,7 @@ const pintarFooter = () =>{
 	templateOrangeFooter.querySelector('div.total span.total-amount').textContent = nPrecio
 
 	carritoGeneralOrange.querySelector('div.dropdown-cart-header span').textContent = nCantidad + " Artículos"
+	barraNaranjaDeCompras.querySelectorAll('a')[0].querySelector('span.total-count').textContent = nCantidad
 
 	const clone = templateFooter.cloneNode(true)
 	const cloneOrange = templateOrangeFooter.cloneNode(true)
