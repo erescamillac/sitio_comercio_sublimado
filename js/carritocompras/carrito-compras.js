@@ -39,6 +39,9 @@ const carritoGeneralOrange = document.getElementById('carrito-general-orange')
 // EQUIV :: 'Orange'-header : Total de Artículos ::
 const barraNaranjaDeCompras = document.getElementById('barraDeCompras')
 
+// SELECCIONAR EL botón 'FIJO' de ['PAGAR'] ::
+const btnProcederPagoNaranja = document.getElementById('btn-proceder-pago');
+
 // Representación del CARRITO a nivel LÓGICO (en Memoria) como un OBJETO, inicialmente VACÍO (sin propiedades)
 let carrito = {};
 
@@ -311,8 +314,13 @@ const pintarFooter = () =>{
 		// Actualizar Total de Artículos Naranja 'barra'
 		barraNaranjaDeCompras.querySelectorAll('a')[0].querySelector('span.total-count').textContent = 0
 		carritoGeneralOrange.querySelector('div.dropdown-cart-header span').textContent = 0 + " Artículos"
+		// SI el carrito está VACÍO ... entonces OCULTAR btnPagar...
+		btnProcederPagoNaranja.style.display = "none";
 		return
-	} //-- fin IF carrito VACÍO
+	}else{
+		// SI el carrito NO está VACÍO... entonces MOSTRAR btnPagar...
+		btnProcederPagoNaranja.style.display = "block";
+	} //-- fin IF-else carrito VACÍO
 	const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0);
 	// producto.precio * producto.cantidad
 	const nPrecio = Object.values(carrito).reduce(

@@ -59,8 +59,9 @@
                             * Esta función se ejecuta durante el envió de la petición al
                             * servidor.
                             * */
-                            // btnEnviar.text("Enviando"); Para button 
-                            // btnEnviar.val("Enviando"); // Para input de tipo button
+                            // POSIBLE: 'animación' de loading...
+                            // btnEnviar.text("Enviando..."); Para button 
+                            // btnEnviar.val("Enviando..."); // Para input de tipo button
                             // btnEnviar.attr("disabled","disabled");
                         },
                         complete:function(data){
