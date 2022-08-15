@@ -287,6 +287,9 @@
                                                         </tr>
                                                     </tfoot>
                                                 </table>
+												<button id="btn-imprimir-ticket" class="btn btn-warning btn-sm">
+													Imprimir TICKET
+                                                </button>
                                             </div> <!-- FIN: div.container -->
 
                                             <template id="template-footer-POS">
@@ -2283,6 +2286,10 @@
 
     <!-- JS :: punto de Venta (POS) :: CUSTOM -->
     <script src="../../js/punto-venta-js/punto-venta-script.js"></script>
+
+	<!-- JS:: scripts para IMPRESORA TÉRMICA de Tickets :: -->
+	<script src="../../js/punto-venta-js/ConectorPlugin.js"></script>
+	<script src="../../js/punto-venta-js/imprimir-ticket-js-eec.js"></script>
 	
 	<!-- # INI: Modal de Inicio de Sesión para los ADMINISTRADORES -->
 	<div class="modal fade" id="modalInicioSesionAdmin" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true">

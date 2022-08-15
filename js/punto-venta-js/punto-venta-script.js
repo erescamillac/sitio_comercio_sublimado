@@ -153,7 +153,7 @@ const setCarritoPOS = objProductoOrg => {
 } //--FIN: funcion setCarritoPOS()
 
 const pintarCarritoPOS = () => {
-    console.log( "-- funcion: pintarCarritoPOS() -- " );
+    console.log( "-- funcion: pintarCarritoPOS() EEC -- " );
     console.log( carritoPOS );
 
     itemsPOS.innerHTML = '';
