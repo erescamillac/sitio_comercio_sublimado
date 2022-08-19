@@ -2485,6 +2485,9 @@
 	<!-- Script de Formulario login AJAX -->
 	<script src="js/formularios/formulario-login-ajax.js"></script>
 
+	<!-- Script: Carga de productos desde API de Server Virt. URIEL -->
+	<script src="js/home-loadign-js/carga-productos-api-uriel.js"></script>
+
 	<!-- # INI: Modal de Inicio de Sesión para los ADMINISTRADORES -->
 	<div class="modal fade" id="modalInicioSesionAdmin" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true">
     <div class="modal-dialog" role="document">
