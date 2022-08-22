@@ -1,0 +1,61 @@
+Could not connect to development server.
+
+Paso 1.- Create file in 
+android/app/src/main/assets
+
+//**--**--**--**--**--**--**--**--**
+
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+React Native project that uses Metro Bundler
+React Native project / Metro Bundler
+
+//**--**--**--**--**
+
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+//**--**--**--**--**
+
+ cb.apply is not a function nodejs v16.15.1
+ 
+http://10.0.2.2:8081/index.delta
+
+set 'Debug server host & port for device' in 'Dev settings' android studio
+
+http://10.0.2.2:8081/index.delta?platform=android&dev=true&minify=false
+
+http://10.0.2.2:8081/index.delta?platform=android&dev=true&minify=false
+
+http://10.0.2.2:8081/index.delta?platform=android&dev=true&minify=false
+
+Dirección IPv4. . . . . . . . . . . . . . : 192.168.116.145
+
+http://192.168.116.145:8081/index.delta?platform=android&dev=true&minify=false
+
+http://192.168.116.145:8081/index.delta?platform=android&dev=true&minify=false
+
+
+header("Refresh: 1; url='http://localhost/job_practice/GST-calculation/paypal.php'");
+
+
+http://localhost/sitio_comercio_sublimado/php/clientes/formularioLoginCliente.php
+http://localhost/sitio_comercio_sublimado/php/clientes/pago_exitoso.php?id=<??>
+## [paypal.php]
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"
+ id="buyCredits" name="buyCredits">
+	
+	
+	<!-- Identify your BUSSINESS so that you can collect the payments. -->
+	<input type="hidden" name="business" value="sb-7488@business.example.com">
+	
+	<input type="hidden" name="amount" value="<?php echo $montoTotal ?>">
+	<input type="hidden" name="currency_code" value="MXN">
+	
+	<input type="hidden" name="return" value="http://localhost/sitio_comercio_sublimado/php/clientes/pago_exitoso.php?id=<?php echo $id_venta; ?>">
+	
+</form>
+<script>
+	document.getElementById("buyCredits").submit();
+</script>
+
